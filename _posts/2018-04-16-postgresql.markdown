@@ -30,8 +30,8 @@ postgres=# select pg_size_pretty(pg_database_size('shifenzheng'));
 
 计算数据库的大小（不含索引）
 pg没有提供计算不含索引的数据库大小的函数，只能通过下面的方式计算。
-```
-sum(pg_table_size(table_name)) from (SELECT ('"' || tablename || '"') AS table_name
+```sql
+SELECT sum(pg_table_size(table_name)) FROM (SELECT ('"' || tablename || '"') AS table_name
 FROM pg_tables
-where schemaname = 'public') as tn;
+WHERE schemaname = 'public') AS tn;
 ```
